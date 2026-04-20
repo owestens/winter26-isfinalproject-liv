@@ -1,0 +1,322 @@
+/* Sets the background color and default text color for the whole page */
+body {
+    background-color: #FFF8DC; /* Light creamy yellow fallback */
+    background-image: url("assets/Olivia Westenskow-2.JPG");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #CC3300; /* Dark orange/red */
+    font-family: Arial, Helvetica, sans-serif; 
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Centers the main content blocks */
+.mango-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Styles the big title */
+h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 3rem;
+    margin-top: 90px;
+    margin-bottom: 10px;
+}
+
+/* Styles the brief description */
+.description {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    max-width: 600px;
+}
+
+/* Controls the image size so it doesn't take over the whole screen */
+.mango-image {
+    display: block;
+    width: 85%;          /* allow image to take up more horizontal space */
+    max-width: 900px;    /* but don't exceed a comfortable large size */
+    height: auto;
+    border-radius: 10px;
+    margin: 0 auto 30px; /* center and keep bottom gap */
+}
+
+/* Styles the ordered list box to keep it aligned nicely */
+.recipe-list-container {
+    text-align: left; 
+    font-size: 1.3rem;
+    line-height: 2; 
+}
+
+/* Increase spacing between ordered lists and their items */
+ol {
+    margin-bottom: 1.5rem; /* space after each ordered list */
+}
+
+/* Extra space between consecutive ordered lists */
+ol + ol {
+    margin-top: 1.5rem;
+}
+
+/* Add space between list items for readability */
+ol li {
+    margin-bottom: 0.6rem;
+}
+
+/* Styles the clickable recipe links */
+a {
+    color: #CC3300;
+    text-decoration: none; 
+    padding: 5px 10px; 
+    border-radius: 5px;
+    transition: background-color 0.3s ease; 
+}
+
+/* Creates the highlight effect when you hover over the text */
+a:hover {
+    background-color: #FFDAB9; 
+    color: #A32900; 
+}
+
+/* Styles the video intro text */
+.video-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 40px; 
+    margin-bottom: 20px;
+}
+
+/* Keeps the video wrapper centered and gives it space */
+.video-wrapper {
+    margin-bottom: 40px;
+}
+
+/* Styles the Tableau intro text */
+.tableau-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 40px; 
+    margin-bottom: 20px;
+}
+
+/* Centers the Tableau graph and adds breathing room */
+.tableau-wrapper {
+    margin-bottom: 60px;
+    width: 100%;
+    max-width: 1000px; 
+    display: flex;
+    justify-content: center;
+}
+
+/* Styles the Back to Top anchor link as a button */
+.back-to-top {
+    display: inline-block;
+    background-color: #CC3300; 
+    color: #FFF8DC;
+    padding: 10px 20px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+/* Creates a darker hover effect specifically for the button */
+.back-to-top:hover {
+    background-color: #A32900; 
+    color: #FFF8DC; 
+}
+
+/* --- Styling Additions --- */
+
+/* Adds a soft dark orange drop shadow to the main h1 title */
+h1 {
+    text-shadow: 3px 3px 6px rgba(163, 41, 0, 0.4); 
+}
+
+/* Adds a dark orange/red border and soft shadow to the mango image */
+.mango-image {
+    border: 5px solid #CC3300; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    padding: 2px; /* Adds a tiny bit of space inside the border */
+}
+
+/* Adds a border specifically to the embedded YouTube video */
+.video-wrapper iframe {
+    border: 4px solid #CC3300;
+    border-radius: 8px; /* Gently rounds the corners of the border */
+}
+
+/* --- Top Navigation Styles --- */
+
+/* Pins the navigation menu to the top right of the screen */
+.top-nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 15px; /* Adds space between each button */
+    z-index:999;
+}
+
+/* Styles the nav buttons to perfectly match the Back To Top button */
+.nav-btn {
+    background-color: #CC3300; 
+    color: #FFF8DC;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Adds the hover effect */
+.nav-btn:hover {
+    background-color: #A32900; 
+    color: #FFF8DC; 
+}
+
+/* --- RESUME PAGE SPECIFIC STYLES --- */
+
+/* Keeps the resume centered and readable so it doesn't stretch too wide */
+.resume-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    text-align: left; 
+}
+
+/* Centers your name and location with a photo background */
+.resume-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 4rem 2rem;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 25px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.resume-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.resume-header > * {
+    position: relative;
+    z-index: 1;
+}
+
+.resume-name {
+    font-size: 4rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.resume-location {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Styles the bold titles floating ABOVE the box */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #CC3300;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    padding-left: 15px; 
+}
+
+/* The new peachy rounded box from your image */
+.resume-box {
+    background-color: #FFDAB9; /* Matches your peachy fill */
+    border: 5px solid #CC3300; /* Thick dark orange border */
+    border-radius: 20px; /* Highly rounded corners */
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    color: #802000; /* Darker red-brown text for easy reading */
+}
+
+/* Layout for the job titles and dates inside the boxes */
+.job-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.job-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #CC3300;
+}
+
+.date-location {
+    font-weight: bold;
+    color: #666666;
+}
+
+.company {
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Formats the bullet points */
+.resume-list {
+    margin-top: 5px;
+    padding-left: 20px;
+    line-height: 1.5;
+}
+
+.resume-list li {
+    margin-bottom: 8px;
+}
+
+/* A subtle line to separate jobs inside the same box */
+.resume-divider {
+    border: 0;
+    height: 2px;
+    background-color: #CC3300; 
+    margin: 20px 0;
+    opacity: 0.3; /* Makes the line slightly see-through */
+}
+
+/* Turns the header into a full-width picture banner with SQUARE corners */
+.resume-header {
+    text-align: center;
+    /* Negative margins pull the box to the very edges and top of the screen! */
+    margin: -20px -20px 40px -20px; 
+    
+    /* UPDATED: Points to your brand new picture! */
+    background-image: url('../assets/threeolivia.jpg'); 
+    background-size: cover;
+    background-position: center;
+    
+    /* Removes the rounded corners to make it perfectly square */
+    border-radius: 0; 
+    
+    /* Pushes the text down slightly so it doesn't hit your navigation buttons */
+    padding: 120px 20px 60px 20px; 
+    color: #FFFFFF; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}

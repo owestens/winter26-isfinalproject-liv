@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mango Memory Match</title>
+    <style>
+        /* --- General Page Styling --- */
+        body {
+            background-color: #FFF8DC;
+            color: #CC3300;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* --- Top Navigation --- */
+        .top-nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            background-color: #CC3300;
+            color: #FFF8DC;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background-color: #A32900;
+            color: #FFF8DC;
+        }
+
+        /* --- Game Board Styling --- */
+        h1 {
+            text-transform: uppercase;
+            font-size: 3rem;
+            margin-top: 90px;
+            margin-bottom: 5px;
+            text-shadow: 3px 3px 6px rgba(163, 41, 0, 0.4);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 90px);
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card {
+            width: 90px;
+            height: 90px;
+            background-color: #FFDAB9; /* Peachy orange for the back of the card */
+            border: 3px solid #CC3300;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s, background-color 0.2s;
+            user-select: none; /* Prevents text highlighting when clicking fast */
+        }
+
+        /* Changes the card appearance when it is flipped over */
+        .card.flipped {
+            background-color: #FFFFFF;
+            transform: scale(1.05); /* Makes the card pop out slightly */
+            border-color: #A32900;
+        }
+
+        /* --- Play Again Button --- */
+        .reset-btn {
+            margin-top: 40px;
+            background-color: #CC3300;
+            color: #FFF8DC;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background-color: #A32900;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="home.html" class="nav-btn">Home</a>
+        <a href="resume.html" class="nav-btn">Resume</a>
+        <a href="game.html" class="nav-btn">Game</a>
+    </div>
+
+    <h1>Mango Memory Match</h1>
+    <p>Find all the matching tropical fruits!</p>
+
+    <div class="game-board" id="gameBoard"></div>
+    
+    <button class="reset-btn" onclick="initGame()">Play Again</button>
+
+    <script>
+        // The array of fruit emojis to match (8 pairs total)
+        const fruits = ['🥭', '🥭', '🍍', '🍍', '🥥', '🥥', '🍌', '🍌', '🍉', '🍉', '🥝', '🥝', '🍓', '🍓', '🍑', '🍑'];
+        
+        let gameBoard = document.getElementById('gameBoard');
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false; // Prevents clicking more than 2 cards at once
+
+        // Function to shuffle the fruits randomly every time you play
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Function triggered when a card is clicked
+        function flipCard() {
+            if (lockBoard) return;
+            if (this === firstCard) return; // Prevents double-clicking the same card
+
+            this.classList.add('flipped');
+            this.innerText = this.dataset.fruit;
+
+            // If it's the first card clicked
+            if (!firstCard) {
+                firstCard = this;
+                return;
+            }
+
+            // If it's the second card clicked
+            secondCard = this;
+            checkForMatch();
+        }
+
+        // Logic to check if the two flipped cards are identical
+        function checkForMatch() {
+            let isMatch = firstCard.dataset.fruit === secondCard.dataset.fruit;
+
+            if (isMatch) {
+                // It's a match! Disable clicking on these two permanently
+                firstCard.removeEventListener('click', flipCard);
+                secondCard.removeEventListener('click', flipCard);
+                resetBoard();
+            } else {
+                // Not a match. Flip them back over after a 1 second delay
+                lockBoard = true;
+                setTimeout(() => {
+                    firstCard.classList.remove('flipped');
+                    firstCard.innerText = '';
+                    secondCard.classList.remove('flipped');
+                    secondCard.innerText = '';
+                    resetBoard();
+                }, 1000);
+            }
+        }
+
+        // Clears the temporary variables for the next turn
+        function resetBoard() {
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+        }
+
+        // Clears the board and sets up a brand new game
+        function initGame() {
+            gameBoard.innerHTML = ''; // Wipes the old cards
+            resetBoard();
+            let shuffledFruits = shuffle([...fruits]);
+
+            // Creates a new card element for each fruit in the shuffled array
+            shuffledFruits.forEach(fruit => {
+                let card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.fruit = fruit; // Secretly stores the fruit type on the card
+                card.addEventListener('click', flipCard);
+                gameBoard.appendChild(card);
+            });
+        }
+
+        // Starts the game immediately when the page first loads
+        initGame();
+    </script>
+
+</body>
+</html>
